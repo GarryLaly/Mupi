@@ -19,18 +19,16 @@ const PageTitle = ({
   return (
     <View style={styles.container}>
       {leftIcon ? (
-        <View style={styles.wrapLeft}>
-          <TouchableOpacity activeOpacity={1} onPress={leftIconPress}>
-            <Image source={leftIcon} style={styles.leftIcon} />
+        <View>
+          <TouchableOpacity onPress={leftIconPress}>
+            <Image source={leftIcon} style={styles.icon} />
           </TouchableOpacity>
         </View>
       ) : (
-        <View style={styles.wrapLeft}>
+        <View>
           {!withoutBack && (
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() => navigation.goBack()}>
-              <Image source={IconBack} style={styles.leftIcon} />
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image source={IconBack} style={styles.icon} />
             </TouchableOpacity>
           )}
           {withoutBack && <Gap left={dimens[16]} />}
@@ -38,11 +36,11 @@ const PageTitle = ({
       )}
       <Text style={styles.title}>{title}</Text>
       {rightIcon ? (
-        <TouchableOpacity activeOpacity={1} onPress={rightIconPress}>
-          <Image source={rightIcon} style={styles.leftIcon} />
+        <TouchableOpacity onPress={rightIconPress}>
+          <Image source={rightIcon} style={styles.icon} />
         </TouchableOpacity>
       ) : (
-        <View style={styles.leftIcon} />
+        <View style={styles.icon} />
       )}
     </View>
   );
@@ -59,27 +57,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  leftIcon: {
-    height: dimens[30],
-    width: dimens[30],
+  icon: {
+    height: dimens[24],
+    width: dimens[24],
   },
-  wrapLeft: {},
   title: {
     fontFamily: fonts.bold,
     color: colors.black,
-    fontSize: dimens[16],
-  },
-  isRightText: {
-    fontFamily: fonts.normal,
-    color: colors.blue,
-    fontWeight: '500',
-    fontSize: dimens[12],
-    marginRight: dimens[16],
-  },
-  rightIcon: {
-    position: 'absolute',
-    right: 0,
-    height: 40,
-    width: 40,
+    fontSize: dimens[18],
   },
 });

@@ -23,6 +23,9 @@ export const colors = {
   red3: '#D2634B',
   // gray
   gray: '#9D9D9D',
+  gray2: '#AAA9B1',
+  gray3: '#E5E4EA',
+  gray4: '#9C9C9C',
   literallygray: '#777777',
   inputBorder: '#9A9A9A40',
   inputPhoneNumber: '#BCBCBC',
