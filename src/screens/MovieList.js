@@ -8,12 +8,14 @@ import {
   ScrollView,
 } from 'react-native';
 
+import {PageTitle} from '@components';
 import {colors, dimens, fonts} from '@utils';
 
 const MovieList = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={'white'} barStyle="dark-content" />
+      <PageTitle title="Mupi" />
       <ScrollView style={styles.content}>
         <Text
           style={styles.headerTitleText}

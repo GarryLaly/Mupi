@@ -3,26 +3,47 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {colors, dimens, fonts} from '@utils';
-import {IconBackWhite} from '@assets/icons';
+import {IconBack} from '@assets/icons';
 import {Gap} from '@components';
 
-const PageTitle = ({title, rightComponent, withoutBack}) => {
+const PageTitle = ({
+  title,
+  leftIcon,
+  leftIconPress,
+  rightIcon,
+  rightIconPress,
+  withoutBack,
+}) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <View style={styles.wrapLeft}>
-        {!withoutBack && (
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => navigation.goBack()}>
-            <Image source={IconBackWhite} style={styles.leftIcon} />
+      {leftIcon ? (
+        <View style={styles.wrapLeft}>
+          <TouchableOpacity activeOpacity={1} onPress={leftIconPress}>
+            <Image source={leftIcon} style={styles.leftIcon} />
           </TouchableOpacity>
-        )}
-        {withoutBack && <Gap left={dimens[16]} />}
-      </View>
+        </View>
+      ) : (
+        <View style={styles.wrapLeft}>
+          {!withoutBack && (
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => navigation.goBack()}>
+              <Image source={IconBack} style={styles.leftIcon} />
+            </TouchableOpacity>
+          )}
+          {withoutBack && <Gap left={dimens[16]} />}
+        </View>
+      )}
       <Text style={styles.title}>{title}</Text>
-      {rightComponent ? rightComponent : <View style={styles.leftIcon} />}
+      {rightIcon ? (
+        <TouchableOpacity activeOpacity={1} onPress={rightIconPress}>
+          <Image source={rightIcon} style={styles.leftIcon} />
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.leftIcon} />
+      )}
     </View>
   );
 };
@@ -31,7 +52,7 @@ export default PageTitle;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.blue,
+    backgroundColor: colors.white,
     paddingHorizontal: dimens[16],
     paddingVertical: dimens[20],
     flexDirection: 'row',
@@ -45,7 +66,7 @@ const styles = StyleSheet.create({
   wrapLeft: {},
   title: {
     fontFamily: fonts.bold,
-    color: colors.white,
+    color: colors.black,
     fontSize: dimens[16],
   },
   isRightText: {
