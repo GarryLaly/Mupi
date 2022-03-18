@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 import {colors, dimens, fonts} from '@utils';
 import {IconStar, IconClock} from '@assets/icons';
@@ -8,19 +9,19 @@ const HorizontalItem = ({title, photo, rating, crew, year, onPress}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.photoContainer}>
-        <Image source={photo} style={styles.photo} />
+        <FastImage source={photo} style={styles.photo} />
       </View>
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.row}>
-          <Image source={IconStar} style={styles.icon} />
+          <FastImage source={IconStar} style={styles.icon} />
           <Text style={styles.info}>
             {rating === '' ? '0' : rating}/10 IMDb
           </Text>
         </View>
         <Text style={styles.crew}>{crew}</Text>
         <View style={styles.row}>
-          <Image source={IconClock} style={styles.icon} />
+          <FastImage source={IconClock} style={styles.icon} />
           <Text style={styles.year}>{year}</Text>
         </View>
       </View>

@@ -8,6 +8,7 @@ import {Gap} from '@components';
 
 const PageTitle = ({
   title,
+  backgroundColor,
   leftIcon,
   leftIconPress,
   rightIcon,
@@ -17,7 +18,7 @@ const PageTitle = ({
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, backgroundColor ? {backgroundColor} : {}]}>
       {leftIcon ? (
         <View>
           <TouchableOpacity onPress={leftIconPress}>

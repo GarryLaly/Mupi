@@ -3,12 +3,12 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  Text,
   FlatList,
   ScrollView,
   RefreshControl,
 } from 'react-native';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast';
 
 import {
   PageTitle,
@@ -17,7 +17,7 @@ import {
   HorizontalItem,
 } from '@components';
 import {IconDrawer, IconNotif} from '@assets';
-import {colors, dimens, fonts} from '@utils';
+import {dimens} from '@utils';
 import {formatAPIUrl} from '@config';
 
 const MovieList = ({navigation}) => {
@@ -38,6 +38,7 @@ const MovieList = ({navigation}) => {
       setMovieNow(items);
     } catch (error) {
       setIsLoadingMovieNow(false);
+      Toast.show(error);
       console.warn('error fetchMovieNow', error);
     }
   };
@@ -54,6 +55,7 @@ const MovieList = ({navigation}) => {
       setMoviePopular(items);
     } catch (error) {
       setIsLoadingMoviePopular(false);
+      Toast.show(error);
       console.warn('error fetchMoviePopular', error);
     }
   };
@@ -97,7 +99,7 @@ const MovieList = ({navigation}) => {
         />
         <SectionTitle title="Popular" onPress={() => {}} />
         <FlatList
-          data={moviePopular.filter((item, index) => index < 10)}
+          data={moviePopular}
           style={styles.flatList}
           renderItem={({item, index}) => (
             <HorizontalItem

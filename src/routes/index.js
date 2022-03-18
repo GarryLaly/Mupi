@@ -7,14 +7,10 @@ import Toast from 'react-native-simple-toast';
 // screen
 import {MovieList, MovieDetail} from '@screens';
 
-import {baseUrl} from '@config';
-
 const Routes = () => {
   const Stack = createNativeStackNavigator();
 
   useEffect(() => {
-    axios.defaults.baseURL = baseUrl;
-
     axios.interceptors.response.use(
       response => {
         return response;
