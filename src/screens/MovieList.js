@@ -88,6 +88,9 @@ const MovieList = ({navigation}) => {
               title={item.title}
               photo={{uri: item.image}}
               rating={item.imDbRating}
+              onPress={() =>
+                navigation.navigate('MovieDetail', {detailID: item.id})
+              }
             />
           )}
           keyExtractor={item => item.id}
@@ -104,6 +107,9 @@ const MovieList = ({navigation}) => {
               rating={item.imDbRating}
               crew={item.crew}
               year={item.year}
+              onPress={() =>
+                navigation.navigate('MovieDetail', {detailID: item.id})
+              }
             />
           )}
           keyExtractor={item => item.id}

@@ -4,9 +4,9 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {colors, dimens, fonts} from '@utils';
 import {IconStar, IconClock} from '@assets/icons';
 
-const HorizontalItem = ({title, photo, rating, crew, year}) => {
+const HorizontalItem = ({title, photo, rating, crew, year, onPress}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.photoContainer}>
         <Image source={photo} style={styles.photo} />
       </View>
