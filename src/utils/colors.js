@@ -9,9 +9,9 @@ export const colors = {
   black3: '#999999',
   black4: '#8294B1',
   // blue
-  blue: '#007AFF',
-  blue2: '#E5E8ED',
-  blue3: '#E2E8F5',
+  blue: '#110E47',
+  blue2: '#DBE3FF',
+  blue3: '#88A4E8',
   blue4: '#BED9ED',
   blue5: '#2D8AC2',
   blue50: '#A7D0F4',

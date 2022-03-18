@@ -81,8 +81,8 @@ const MovieList = ({navigation}) => {
         <SectionTitle title="Now Showing" onPress={() => {}} />
         <FlatList
           data={movieNow}
-          horizontal
           style={styles.flatList}
+          horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({item, index}) => (
             <GeneralItem
@@ -97,7 +97,12 @@ const MovieList = ({navigation}) => {
           )}
           keyExtractor={item => item.id}
         />
-        <SectionTitle title="Popular" onPress={() => {}} />
+        <SectionTitle
+          title="Popular"
+          onPress={() =>
+            navigation.navigate('MovieDetail', {detailID: 'item.id'})
+          }
+        />
         <FlatList
           data={moviePopular}
           style={styles.flatList}

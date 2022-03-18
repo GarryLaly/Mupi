@@ -3,18 +3,28 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  Image,
   Text,
   View,
   RefreshControl,
   ScrollView,
+  TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
+import FastImage from 'react-native-fast-image';
 
-import {PageTitle} from '@components';
+import {
+  PageTitle,
+  SectionTitle,
+  Gap,
+  RatingText,
+  CategoryList,
+  InfoList,
+  CastItem,
+} from '@components';
 import {colors, dimens, fonts} from '@utils';
-import {IconMenu} from '@assets';
+import {IconMenu, IconPlay, IconBookmark} from '@assets';
 import {formatAPIUrl} from '@config';
 
 const MovieDetail = ({navigation, route}) => {
@@ -50,14 +60,100 @@ const MovieDetail = ({navigation, route}) => {
         translucent
         barStyle="light-content"
       />
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={false} onRefresh={fetchDetail} />
-        }>
-        <Image source={{uri: detail?.image}} style={styles.photo} />
+      <View style={styles.photoContainer}>
+        <FastImage source={{uri: detail?.image}} style={styles.photo} />
+        <View style={styles.photoOverlay} />
+        <TouchableOpacity style={styles.playContainer} onPress={() => {}}>
+          <View style={styles.playIconContainer}>
+            <FastImage source={IconPlay} style={styles.playIcon} />
+          </View>
+          <Text style={styles.playText}>Play Trailer</Text>
+        </TouchableOpacity>
         <View style={styles.header}>
           <PageTitle backgroundColor="transparent" rightIcon={IconMenu} />
         </View>
+      </View>
+      <ScrollView
+        style={styles.content}
+        refreshControl={
+          <RefreshControl refreshing={false} onRefresh={fetchDetail} />
+        }>
+        <View style={styles.row2}>
+          <Text style={styles.title}>Spiderman: No Way Home</Text>
+          <FastImage source={IconBookmark} style={styles.icon} />
+        </View>
+        <RatingText rating={2} />
+        <Gap top={dimens[16]} />
+        <CategoryList items={['Action', 'Comedy']} />
+        <Gap top={dimens[16]} />
+        <InfoList
+          items={[
+            {
+              label: 'Length',
+              value: '2h 28min',
+            },
+            {
+              label: 'Language',
+              value: 'English',
+            },
+            {
+              label: 'Rating',
+              value: 'PG-13',
+            },
+          ]}
+        />
+        <Gap top={dimens[24]} />
+        <SectionTitle title="Description" />
+        <Text style={styles.description}>
+          With Spider-Man's identity now revealed, Peter asks Doctor Strange for
+          help. When a spell goes wrong, dangerous foes from other worlds start
+          to appear, forcing Peter to discover what it truly means to be
+          Spider-Man.
+        </Text>
+        <Gap top={dimens[24]} />
+        <SectionTitle title="Cast" onPress={() => {}} />
+        <FlatList
+          data={[
+            {
+              image:
+                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
+              title: 'Tom Holland',
+            },
+            {
+              image:
+                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
+              title: 'Tom Holland',
+            },
+            {
+              image:
+                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
+              title: 'Tom Holland',
+            },
+            {
+              image:
+                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
+              title: 'Tom Holland',
+            },
+            {
+              image:
+                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
+              title: 'Tom Holland',
+            },
+          ]}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.flatList}
+          renderItem={({item, index}) => (
+            <CastItem
+              key={index}
+              title={item.title}
+              photo={{uri: item.image}}
+              onPress={() => {}}
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
+        <Gap top={dimens[24]} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -70,24 +166,95 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  content: {
-    paddingHorizontal: dimens[16],
-    paddingVertical: dimens[8],
-  },
   header: {
     position: 'absolute',
     width: '100%',
     top: dimens[32],
     left: 0,
   },
+  photoContainer: {
+    position: 'relative',
+  },
   photo: {
     width: '100%',
     height: 300,
     resizeMode: 'cover',
   },
+  photoOverlay: {
+    backgroundColor: colors.blue,
+    opacity: 0.2,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    left: 0,
+    top: 0,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  row2: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  playContainer: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    left: 0,
+    top: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  playIconContainer: {
+    backgroundColor: colors.white,
+    borderRadius: dimens[60],
+    width: dimens[45],
+    height: dimens[45],
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  playIcon: {
+    width: dimens[24],
+    height: dimens[24],
+    resizeMode: 'contain',
+  },
+  playText: {
+    fontFamily: fonts.bold,
+    color: colors.white,
+    fontSize: dimens[14],
+    marginTop: dimens[8],
+  },
+  content: {
+    backgroundColor: colors.white,
+    borderTopLeftRadius: dimens[8],
+    borderTopRightRadius: dimens[8],
+    padding: dimens[24],
+    marginTop: -dimens[32],
+  },
+  title: {
+    fontFamily: fonts.bold,
+    color: colors.black,
+    fontSize: dimens[24],
+    maxWidth: 200,
+    marginBottom: dimens[8],
+  },
+  icon: {
+    width: dimens[24],
+    height: dimens[24],
+    resizeMode: 'contain',
+  },
+  description: {
+    fontFamily: fonts.normal,
+    color: colors.gray4,
+    fontSize: dimens[14],
+    lineHeight: dimens[28],
+    marginTop: -dimens[12],
+  },
+  flatList: {
+    marginTop: -dimens[4],
+    marginRight: -dimens[16],
+    paddingBottom: dimens[20],
   },
 });

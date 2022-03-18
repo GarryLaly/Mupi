@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: fonts.bold,
-    color: colors.black,
+    color: colors.blue,
     fontSize: dimens[18],
   },
   action: {

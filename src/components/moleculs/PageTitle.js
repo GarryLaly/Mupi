@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {colors, dimens, fonts} from '@utils';
-import {IconBack} from '@assets/icons';
+import {IconBack} from '@assets';
 import {Gap} from '@components';
 
 const PageTitle = ({
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: fonts.bold,
-    color: colors.black,
+    color: colors.blue,
     fontSize: dimens[18],
   },
 });

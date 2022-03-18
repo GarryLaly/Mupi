@@ -2,8 +2,9 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
+import {RatingText} from '@components';
 import {colors, dimens, fonts} from '@utils';
-import {IconStar, IconClock} from '@assets/icons';
+import {IconClock} from '@assets';
 
 const HorizontalItem = ({title, photo, rating, crew, year, onPress}) => {
   return (
@@ -13,12 +14,7 @@ const HorizontalItem = ({title, photo, rating, crew, year, onPress}) => {
       </View>
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
-        <View style={styles.row}>
-          <FastImage source={IconStar} style={styles.icon} />
-          <Text style={styles.info}>
-            {rating === '' ? '0' : rating}/10 IMDb
-          </Text>
-        </View>
+        <RatingText rating={rating} />
         <Text style={styles.crew}>{crew}</Text>
         <View style={styles.row}>
           <FastImage source={IconClock} style={styles.icon} />
@@ -77,11 +73,6 @@ const styles = StyleSheet.create({
     height: dimens[12],
     resizeMode: 'contain',
     marginRight: dimens[4],
-  },
-  info: {
-    fontFamily: fonts.normal,
-    color: colors.gray4,
-    fontSize: dimens[12],
   },
   crew: {
     fontFamily: fonts.normal,
