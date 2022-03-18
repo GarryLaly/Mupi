@@ -79,12 +79,12 @@ const MovieDetail = ({navigation, route}) => {
           <RefreshControl refreshing={false} onRefresh={fetchDetail} />
         }>
         <View style={styles.row2}>
-          <Text style={styles.title}>Spiderman: No Way Home</Text>
+          <Text style={styles.title}>{detail?.fullTitle}</Text>
           <FastImage source={IconBookmark} style={styles.icon} />
         </View>
-        <RatingText rating={2} />
+        <RatingText rating={detail?.imDbRating} />
         <Gap top={dimens[16]} />
-        <CategoryList items={['Action', 'Comedy']} />
+        <CategoryList items={detail?.genreList?.map(item => item.value)} />
         <Gap top={dimens[16]} />
         <InfoList
           items={[
@@ -94,59 +94,28 @@ const MovieDetail = ({navigation, route}) => {
             },
             {
               label: 'Language',
-              value: 'English',
+              value: detail?.languages,
             },
             {
               label: 'Rating',
-              value: 'PG-13',
+              value: detail?.contentRating,
             },
           ]}
         />
         <Gap top={dimens[24]} />
         <SectionTitle title="Description" />
-        <Text style={styles.description}>
-          With Spider-Man's identity now revealed, Peter asks Doctor Strange for
-          help. When a spell goes wrong, dangerous foes from other worlds start
-          to appear, forcing Peter to discover what it truly means to be
-          Spider-Man.
-        </Text>
+        <Text style={styles.description}>{detail?.plot}</Text>
         <Gap top={dimens[24]} />
         <SectionTitle title="Cast" onPress={() => {}} />
         <FlatList
-          data={[
-            {
-              image:
-                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
-              title: 'Tom Holland',
-            },
-            {
-              image:
-                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
-              title: 'Tom Holland',
-            },
-            {
-              image:
-                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
-              title: 'Tom Holland',
-            },
-            {
-              image:
-                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
-              title: 'Tom Holland',
-            },
-            {
-              image:
-                'https://m.media-amazon.com/images/M/MV5BZGFmNmRlZmQtMDAyYy00NTJjLTg2ODQtZDI0OWE3M2I2NDcyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,4,128,176_AL_.jpg',
-              title: 'Tom Holland',
-            },
-          ]}
+          data={detail?.actorList}
           horizontal
           showsHorizontalScrollIndicator={false}
           style={styles.flatList}
           renderItem={({item, index}) => (
             <CastItem
               key={index}
-              title={item.title}
+              title={item.name}
               photo={{uri: item.image}}
               onPress={() => {}}
             />

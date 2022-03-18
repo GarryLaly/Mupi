@@ -6,7 +6,7 @@ import {CategoryItem} from '@components';
 const CategoryList = ({items}) => {
   return (
     <View style={styles.container}>
-      {items.map((item, index) => (
+      {items?.map((item, index) => (
         <CategoryItem key={index}>{item}</CategoryItem>
       ))}
     </View>

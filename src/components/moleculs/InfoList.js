@@ -6,7 +6,7 @@ import {InfoText} from '@components';
 const InfoList = ({items}) => {
   return (
     <View style={styles.container}>
-      {items.map((item, index) => (
+      {items?.map((item, index) => (
         <InfoText key={index} {...item} />
       ))}
     </View>
